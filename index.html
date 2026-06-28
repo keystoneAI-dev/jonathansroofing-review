@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonathan's Roofing Co — Share Your Experience</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0f0f0f;
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 20px;
+    padding: 48px 40px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .logo-ring {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c8922a, #e8b84b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 28px;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: #888;
+    margin-bottom: 40px;
+    line-height: 1.5;
+  }
+
+  .stars-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #555;
+    margin-bottom: 16px;
+  }
+
+  .stars {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .star {
+    font-size: 44px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.15s, transform 0.1s;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .star:hover,
+  .star.active {
+    color: #e8b84b;
+    transform: scale(1.1);
+  }
+
+  .star.hovered {
+    color: #e8b84b;
+  }
+
+  .feedback-section {
+    display: none;
+    text-align: left;
+  }
+
+  .feedback-section.visible {
+    display: block;
+  }
+
+  .feedback-section h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 6px;
+  }
+
+  .feedback-section p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: #f0f0f0;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #e8b84b;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+  }
+
+  .consent-block {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .consent-block input[type="checkbox"] {
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: #e8b84b;
+    width: 15px;
+    height: 15px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 14px;
+    background: #e8b84b;
+    color: #0f0f0f;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 8px;
+  }
+
+  .btn:hover { background: #f0c85e; }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+
+  .thank-you {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .thank-you.visible { display: block; }
+
+  .thank-you .icon {
+    font-size: 52px;
+    margin-bottom: 16px;
+  }
+
+  .thank-you h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .thank-you p {
+    font-size: 15px;
+    color: #777;
+    line-height: 1.6;
+  }
+
+  .privacy-link {
+    display: block;
+    font-size: 12px;
+    color: #444;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+  }
+
+  .privacy-link:hover { color: #777; }
+
+  @media (max-width: 480px) {
+    .card { padding: 36px 24px; }
+    .star { font-size: 38px; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo-ring">🏠</div>
+  <h1>Jonathan's Roofing Co</h1>
+  <p class="subtitle">How was your experience with us?<br>Your feedback means everything.</p>
+
+  <div id="rating-section">
+    <p class="stars-label">Tap to rate</p>
+    <div class="stars" id="stars">
+      <span class="star" data-value="1">★</span>
+      <span class="star" data-value="2">★</span>
+      <span class="star" data-value="3">★</span>
+      <span class="star" data-value="4">★</span>
+      <span class="star" data-value="5">★</span>
+    </div>
+  </div>
+
+  <div class="feedback-section" id="feedback-section">
+    <h2>We're sorry to hear that.</h2>
+    <p>Tell us what happened so we can make it right. We take every experience seriously.</p>
+
+    <div class="form-group">
+      <label>Your name</label>
+      <input type="text" id="name" placeholder="John Smith" />
+    </div>
+
+    <div class="form-group">
+      <label>Phone number</label>
+      <input type="tel" id="phone" placeholder="+1 (559) 000-0000" />
+    </div>
+
+    <div class="form-group">
+      <label>What could we have done better?</label>
+      <textarea id="message" placeholder="Tell us about your experience..."></textarea>
+    </div>
+
+    <div class="consent-block">
+      <input type="checkbox" id="consent1" />
+      <span>By checking this box, I consent to receive non-marketing messages from <strong>Jonathan's Roofing Co</strong> regarding my service experience. Message & data rates may apply. Reply STOP to opt out.</span>
+    </div>
+
+    <div class="consent-block">
+      <input type="checkbox" id="consent2" />
+      <span>By checking this box, I consent to receive marketing and promotional messages from <strong>Jonathan's Roofing Co</strong>. Frequency may vary. Message & data rates may apply. Reply STOP to opt out.</span>
+    </div>
+
+    <button class="btn" id="submit-btn" onclick="submitFeedback()">Send Feedback</button>
+
+    <a href="#" class="privacy-link">Privacy Policy</a>
+  </div>
+
+  <div class="thank-you" id="thank-you">
+    <div class="icon">🙏</div>
+    <h2>Thank you for your feedback</h2>
+    <p>We take every experience seriously and will be reaching out to you shortly to make things right.</p>
+  </div>
+</div>
+
+<script>
+  const GOOGLE_REVIEW_URL = "https://www.google.com/maps/place/HGC+Roofing+INC/@36.8316768,-119.8736828,13z/data=!4m12!1m2!2m1!1sroofing!3m8!1s0x86c3600cd8552ad3:0x3afdee384d4528b4!8m2!3d36.8316768!4d-119.8077648!9m1!1b1!15sCgdyb29maW5nWgkiB3Jvb2ZpbmeSARJyb29maW5nX2NvbnRyYWN0b3KaASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVTnVlSEF0VEZCM0VBReABAPoBBAgjEDE!16s%2Fg%2F11lf42tdhx?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D";
+
+  let selectedRating = 0;
+  const stars = document.querySelectorAll('.star');
+
+  stars.forEach(star => {
+    star.addEventListener('mouseover', () => {
+      const val = parseInt(star.dataset.value);
+      stars.forEach(s => {
+        s.classList.toggle('hovered', parseInt(s.dataset.value) <= val);
+      });
+    });
+
+    star.addEventListener('mouseout', () => {
+      stars.forEach(s => s.classList.remove('hovered'));
+    });
+
+    star.addEventListener('click', () => {
+      selectedRating = parseInt(star.dataset.value);
+      stars.forEach(s => {
+        s.classList.toggle('active', parseInt(s.dataset.value) <= selectedRating);
+      });
+
+      setTimeout(() => {
+        if (selectedRating >= 4) {
+          window.location.href = GOOGLE_REVIEW_URL;
+        } else {
+          document.getElementById('feedback-section').classList.add('visible');
+          document.getElementById('feedback-section').scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+    });
+  });
+
+  function submitFeedback() {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !message) {
+      alert('Please fill in your name and feedback before submitting.');
+      return;
+    }
+
+    document.getElementById('feedback-section').classList.remove('visible');
+    document.getElementById('rating-section').style.display = 'none';
+    document.getElementById('thank-you').classList.add('visible');
+  }
+</script>
+
+</body>
+</html>
