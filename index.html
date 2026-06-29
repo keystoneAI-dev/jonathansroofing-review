@@ -290,17 +290,17 @@
     btn.textContent = 'Sending...';
 
     try {
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('phone', phone);
+      formData.append('feedback', message);
+      formData.append('rating', selectedRating);
+      formData.append('source', 'Review Funnel - Negative Feedback');
+
       await fetch(WEBHOOK_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         mode: 'no-cors',
-        body: JSON.stringify({
-          name: name,
-          phone: phone,
-          feedback: message,
-          rating: selectedRating,
-          source: "Review Funnel - Negative Feedback"
-        })
+        body: formData
       });
     } catch (e) {
       console.log('Webhook error:', e);
